@@ -1,0 +1,1 @@
+export PATH=$PATH:/usr/local/gradle-4.4.1/bin
