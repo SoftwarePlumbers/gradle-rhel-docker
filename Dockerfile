@@ -19,7 +19,7 @@ RUN pip3 install awscli
 # Install gradle from the SWP repo
 WORKDIR /usr/local
 RUN \
-	curl -L -u ${nexus_id}:{$nexus_pass} ${BASE_REPO}/gradle/gradle-5.6.4.zip -vsf -o gradle.zip; \
+	curl -L -u ${nexus_id}:${nexus_pass} -vsf https://nexus.softwareplumbers.com/repository/generic/gradle/gradle-5.6.4.zip -o gradle.zip; \
 	unzip gradle.zip; \
 	rm gradle.zip
 
