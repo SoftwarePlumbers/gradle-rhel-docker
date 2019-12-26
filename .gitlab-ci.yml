@@ -15,7 +15,7 @@ build:
   stage: build
   script:
    - docker login ${DOCKER_REPO} -u ${DOCKER_REPO_USER} -p ${DOCKER_REPO_PASS}
-   - docker build --build-arg nexus_user=${NEXUS_USER} --build-arg nexus_pass=${NEXUS_PASS} --build-arg http_proxy=${CONTAINER_HTTP_PROXY} --build-arg no_proxy=${CONTAINER_NO_PROXY} --build-arg local_yum_repo=${LOCAL_YUM_REPO} -t softwareplumbers/gradle-centos:${CI_COMMIT_REF_NAME} .
+   - docker build  --build-arg nexus_id=${DOCKER_REPO_USER} --build-arg nexus_pass=${DOCKER_REPO_PASS} --build-arg http_proxy=${CONTAINER_HTTP_PROXY} --build-arg no_proxy=${CONTAINER_NO_PROXY} --build-arg local_yum_repo=${LOCAL_YUM_REPO} -t softwareplumbers/gradle-centos:${CI_COMMIT_REF_NAME} .
    - docker tag softwareplumbers/gradle-centos:${CI_COMMIT_REF_NAME} ${DOCKER_REPO}/softwareplumbers/gradle-centos:${CI_COMMIT_REF_NAME}
    - docker push ${DOCKER_REPO}/softwareplumbers/gradle-centos:${CI_COMMIT_REF_NAME}
 
