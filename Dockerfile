@@ -24,7 +24,7 @@ COPY --from=downloader /usr/local/gradle-5.6.4 /usr/local/gradle-5.6.4
 COPY yumconfig /opt/yumconfig
 RUN /opt/yumconfig/config.sh ${local_yum_repo}
 #yum-plugin-ovl fixes issues with overlay filesystem causing yum to fail
-RUN yum -y install yum-plugin-ovl && yum -y install vim java-1.8.0-openjdk-devel java-1.7.0-openjdk-devel java-1.11.0-openjdk-devel which git davix unzip python36 python36-pip curl && yum clean all
+RUN yum -y install yum-plugin-ovl && yum -y install vim java-1.8.0-openjdk-devel java-1.7.0-openjdk-devel java-11-openjdk-devel which git davix unzip python36 python36-pip curl && yum clean all
 RUN pip3 install awscli
 
 
