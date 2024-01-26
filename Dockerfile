@@ -1,32 +1,18 @@
-ARG http_proxy
-ARG no_proxy
-ARG local_yum_repo
+FROM almalinux:8.9
 
-FROM centos:7.7.1908 AS downloader
-ARG nexus_id
-ARG nexus_pass
-
-# Install gradle from the SWP repo
+RUN dnf install -y 'dnf-command(config-manager)'
+RUN dnf config-manager --set-enabled powertools
+RUN dnf install -y epel-release
+RUN dnf install -y vim java-1.8.0-openjdk-devel java-11-openjdk-devel which git davix unzip python39 python39-pip curl && yum clean all
 WORKDIR /usr/local
-RUN yum -y install curl unzip
-RUN curl -L -u ${nexus_id}:${nexus_pass} -vsf https://nexus.softwareplumbers.com/repository/generic/gradle/gradle-5.6.4.zip -o gradle.zip; \
-	unzip gradle.zip; 
-
-FROM centos:7.7.1908 
+COPY gradle-8.5.zip .
+RUN unzip gradle-8.5.zip; rm gradle-8.5.zip
 
 # Set up environment
 ENV \
-	PATH=$PATH:/usr/local/gradle-5.6.4/bin \
-	BASE_REPO=https://nexus.softwareplumbers.com/repository 
+	PATH=$PATH:/usr/local/gradle-8.5/bin 
 
-COPY --from=downloader /usr/local/gradle-5.6.4 /usr/local/gradle-5.6.4
-
-COPY yumconfig /opt/yumconfig
-RUN /opt/yumconfig/config.sh ${local_yum_repo}
-#yum-plugin-ovl fixes issues with overlay filesystem causing yum to fail
-RUN yum -y install yum-plugin-ovl && yum -y install vim java-1.8.0-openjdk-devel java-1.7.0-openjdk-devel java-11-openjdk-devel which git davix unzip python36 python36-pip curl && yum clean all
 RUN pip3 install awscli
-
 
 COPY root/.vimrc /root/.vimrc
 ENTRYPOINT ["/bin/bash","-l"]

@@ -1,6 +1,0 @@
-[epel]
-name=Extra Packages for Enterprise Linux 7 - $basearch
-baseurl=http://LOCAL_REPO_SERVER/repository/epel_7_x86_64/
-failovermethod=priority
-enabled=1
-gpgcheck=0
