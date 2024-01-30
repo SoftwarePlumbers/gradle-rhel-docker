@@ -8,9 +8,8 @@ RUN update-alternatives --set jre_openjdk java-21-openjdk.x86_64
 RUN update-alternatives --set javac java-21-openjdk.x86_64
 RUN update-alternatives --set java java-21-openjdk.x86_64
 WORKDIR /usr/local
-COPY gradle-8.5.zip .
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN unzip gradle-8.5.zip; rm gradle-8.5.zip
+COPY gradle-8.5 .
 # Set up environment
 ENV \
 	PATH=$PATH:/usr/local/gradle-8.5/bin 
