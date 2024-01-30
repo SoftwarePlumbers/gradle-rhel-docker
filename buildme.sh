@@ -1,6 +1,6 @@
 #!/bin/bash
 
 docker build \
-	-t softwareplumbers/gradle-centos \
+	-t softwareplumbers/gradle-rhel \
 	.
 
