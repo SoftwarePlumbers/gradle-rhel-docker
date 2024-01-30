@@ -1,0 +1,13 @@
+# action.yml
+name: 'Gradle build action'
+description: 'Run a gradle build task in a defined environment'
+inputs:
+  gradle-task:  
+    description: 'Gradle task to run'
+    required: true
+    default: 'build'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.gradle-task }}
