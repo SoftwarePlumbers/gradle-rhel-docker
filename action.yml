@@ -6,8 +6,17 @@ inputs:
     description: 'Gradle task to run'
     required: true
     default: 'build'
+  username:
+    description: 'User name for repository access'
+    required: false
+  password:
+    description: 'Password for repository access'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.gradle-task }}
+  env:
+    GITHUB_ACTOR: ${{ inputs.username }}
+    GITHUB_TOKEN: ${{ inputs.password }}    
