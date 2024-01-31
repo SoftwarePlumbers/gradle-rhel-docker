@@ -12,6 +12,9 @@ inputs:
   password:
     description: 'Password for repository access'
     required: false
+  ref:
+    description: 'Name of branch or tag'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -19,4 +22,5 @@ runs:
     - ${{ inputs.gradle-task }}
   env:
     GITHUB_ACTOR: ${{ inputs.username }}
-    GITHUB_TOKEN: ${{ inputs.password }}    
+    GITHUB_TOKEN: ${{ inputs.password }}
+    GITHUB_REF_NAME: ${{ inputs.ref }}  
